@@ -84,9 +84,14 @@ module Top();
   task test_case_2_exhaustive();
     t.test_case_begin( "test_case_2_exhaustive" );
 
-    //''' ACTIVITY '''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    // Add checks for exhaustive testing (check all possible inputs)
-    //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    check(0, 0, 0, 0);
+    check(0, 0, 1, 0);
+    check(0, 1, 0, 0);
+    check(0, 1, 1, 1);
+    check(1, 0, 0, 0);
+    check(1, 0, 1, 1);
+    check(1, 1, 0, 1);
+    check(1, 1, 1, 1);
 
     t.test_case_end();
   endtask
@@ -111,6 +116,9 @@ module Top();
   //----------------------------------------------------------------------
 
   initial begin
+    
+    $dumpfile("waves.vcd");
+    $dumpvars;
     t.test_bench_begin( `__FILE__ );
 
     if ((t.n <= 0) || (t.n == 1)) test_case_1_basic();
